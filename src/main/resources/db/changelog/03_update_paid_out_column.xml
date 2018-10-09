@@ -9,7 +9,19 @@
         <addColumn tableName="ticket">
             <column name="external_state" type="varchar(20)"/>
         </addColumn>
+        <sql>
+            update ticket set EXTERNAL_STATE = casewhen(IS_PAID_OUT = true, 'COMPLETED', 'NOT_COMPLETED')
+        </sql>
+        <dropColumn tableName="ticket" columnName="is_paid_out"/>
         <rollback>
+            <addColumn tableName="ticket">
+                <column name="is_paid_out" type="boolean" defaultValue="0">
+                    <constraints nullable="false"/>
+                </column>
+            </addColumn>
+            <sql>
+                update ticket set IS_PAID_OUT = casewhen(EXTERNAL_STATE = 'COMPLETED', 1, 0)
+            </sql>
             <dropColumn tableName="ticket" columnName="external_state"/>
         </rollback>
     </changeSet>

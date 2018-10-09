@@ -6,16 +6,11 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
     <changeSet id="1" author="anatolii" runOnChange="true" failOnError="false">
         <tagDatabase tag="v1"/>
-        <createTable tableName="ticket">
-            <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints primaryKey="true" primaryKeyName="ticket_pk"/>
-            </column>
-            <column name="payout" type="double(17)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_paid_out" type="boolean">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+        <sql tableName="ticket">
+            insert into ticket(payout, is_paid_out) values (1.5, false);
+            insert into ticket(payout, is_paid_out) values (0.5, true);
+            insert into ticket(payout, is_paid_out) values (2.5, false);
+            insert into ticket(payout, is_paid_out) values (4.5, true)
+        </sql>
     </changeSet>
 </databaseChangeLog>
