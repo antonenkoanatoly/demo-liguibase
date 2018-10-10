@@ -14,6 +14,10 @@ public class Ticket {
     @Column(name = "payout")
     private Double payout;
 
+    @Column(name = "external_state")
+    @Enumerated(EnumType.STRING)
+    private ExternalState externalState;
+
     @Column(name = "is_paid_out")
     private boolean isPaidOut;
 
@@ -33,6 +37,14 @@ public class Ticket {
 
     public void setPayout(Double payout) {
         this.payout = payout;
+    }
+
+    public ExternalState getExternalState() {
+        return externalState;
+    }
+
+    public void setExternalState(ExternalState externalState) {
+        this.externalState = externalState;
     }
 
     public boolean isPaidOut() {

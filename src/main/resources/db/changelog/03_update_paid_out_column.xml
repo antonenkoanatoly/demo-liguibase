@@ -19,6 +19,7 @@
                     <constraints nullable="false"/>
                 </column>
             </addColumn>
+            <!--<sqlFile></sqlFile>-->
             <sql>
                 update ticket set IS_PAID_OUT = casewhen(EXTERNAL_STATE = 'COMPLETED', 1, 0)
             </sql>
